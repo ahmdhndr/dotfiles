@@ -2,7 +2,7 @@ return {
   "folke/snacks.nvim",
   opts = {
     notifier = {
-      timeout = 10000,
+      timeout = 5000,
     },
     picker = {
       hidden = true,
