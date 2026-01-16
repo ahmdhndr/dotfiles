@@ -9,26 +9,6 @@ return {
         },
         opts = { skip = true },
       })
-      local focused = true
-      vim.api.nvim_create_autocmd("FocusGained", {
-        callback = function()
-          focused = true
-        end,
-      })
-      vim.api.nvim_create_autocmd("FocusLost", {
-        callback = function()
-          focused = false
-        end,
-      })
-      table.insert(opts.routes, 1, {
-        filter = {
-          cond = function()
-            return not focused
-          end,
-        },
-        view = "notify_send",
-        opts = { stop = false },
-      })
 
       opts.commands = {
         all = {
@@ -56,10 +36,10 @@ return {
   {
     "akinsho/bufferline.nvim",
     event = "VeryLazy",
-    keys = {
-      { "<Tab>", "<Cmd>BufferLineCycleNext<CR>", desc = "Next tab" },
-      { "<S-Tab>", "<Cmd>BufferLineCyclePrev<CR>", desc = "Prev tab" },
-    },
+    -- keys = {
+    --   { "<Tab>", "<Cmd>BufferLineCycleNext<CR>", desc = "Next tab" },
+    --   { "<S-Tab>", "<Cmd>BufferLineCyclePrev<CR>", desc = "Prev tab" },
+    -- },
     opts = {
       options = {
         mode = "tabs",
@@ -117,6 +97,11 @@ return {
         end,
       })
     end,
+  },
+
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    -- enable = false,
   },
 
   {

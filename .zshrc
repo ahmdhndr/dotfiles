@@ -141,6 +141,9 @@ export COLORTERM="truecolor"
 # NVIM
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 
+# GO
+export PATH=$PATH:/usr/local/go/bin
+
 # pnpm
 export PNPM_HOME="/home/ahmdhndr/.local/share/pnpm"
 case ":$PATH:" in

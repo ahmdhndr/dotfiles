@@ -18,6 +18,6 @@ config.window_decorations = "RESIZE"
 
 config.color_scheme = "Tokyo Night (Gogh)"
 
-config.window_background_opacity = 0.95
+config.window_background_opacity = 0.85
 
 return config

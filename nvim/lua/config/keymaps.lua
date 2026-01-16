@@ -129,7 +129,7 @@ vim.diagnostic.config({
   float = {
     border = "rounded",
     focusable = true,
-    source = "always",
+    source = true,
     header = "",
     prefix = "",
   },
