@@ -13,8 +13,8 @@ keymap.set("n", "<Leader>c", '"_c')
 keymap.set("n", "<Leader>C", '"_C')
 keymap.set("v", "<Leader>c", '"_c')
 keymap.set("v", "<Leader>C", '"_C')
-keymap.set("n", "<Leader>d", '"_d')
-keymap.set("n", "<Leader>D", '"_D')
+keymap.set("n", "<Leader>m", '"_d')
+keymap.set("n", "<Leader>M", '"_D')
 keymap.set("v", "<Leader>d", '"_d')
 keymap.set("v", "<Leader>D", '"_D')
 
@@ -25,14 +25,11 @@ keymap.set({ "n", "v" }, "<Space>", "<Nop>", opts)
 keymap.set("n", "+", "<C-a>")
 keymap.set("n", "-", "<C-x>")
 
--- Delete a word backwards
-keymap.set("n", "dw", "vb_d")
-
 -- Select all
 keymap.set("n", "<C-a>", "gg<S-v>G")
 
 -- Jumplist
-keymap.set("n", "<C-m", "<C-i>")
+keymap.set("n", "<C-m>", "<C-i>")
 
 -- New tab
 keymap.set("n", "te", ":tabedit")
@@ -85,7 +82,7 @@ end, { desc = "Go to previous diagnostic message" })
 keymap.set("n", "<leader>dp", function()
   vim.diagnostic.jump({ count = -1, float = true })
 end, { desc = "Go to next diagnostic message" })
-keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
+keymap.set("n", "<leader>u", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
 -- Save and load session
@@ -101,29 +98,36 @@ vim.keymap.set("n", "/se", function()
   end
 end, { desc = "Search exact (\\V)" })
 
--- Find and replace in current file
+-- Find and replace in current file with Preview
 vim.keymap.set("n", "/sr", function()
   local find = vim.fn.input("Find: ")
   if find == "" then
     return
   end
+
   local replace = vim.fn.input("Replace with: ")
   if replace == "" then
     return
   end
-  -- ganti ke find..replace sesuai kebutuhan
-  vim.cmd(string.format("%%s/\\V%s/%s/gc", vim.fn.escape(find, "/\\"), replace))
-end, { desc = "Find & Replace current file" })
 
--- tampilkan diagnostic lengkap untuk baris saat ini
-vim.keymap.set("n", "<leader>de", function()
-  vim.diagnostic.open_float(nil, {
-    focus = false,
-    scope = "line",
-    border = "rounded",
-    source = "always",
-  })
-end, { desc = "Show full diagnostic message" })
+  -- Set the search register so matches are highlighted immediately
+  vim.fn.setreg("/", "\\V" .. find)
+  vim.opt.hlsearch = true
+
+  -- Construct the command:
+  -- %s = whole file
+  -- \V = very nomagic (exact)
+  -- g = global
+  -- c = confirm (the preview/choice)
+  local cmd = string.format("%%s/\\V%s/%s/gc", vim.fn.escape(find, "/\\"), replace)
+
+  -- Execute and handle the redraw to show highlights
+  vim.cmd("redraw")
+  local success, err = pcall(vim.cmd, cmd)
+  if not success then
+    vim.notify("Replace aborted or failed: " .. err, vim.log.levels.ERROR)
+  end
+end, { desc = "Find & Replace with Preview/Confirm" })
 
 vim.diagnostic.config({
   float = {

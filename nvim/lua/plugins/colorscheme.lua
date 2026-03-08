@@ -1,18 +1,8 @@
 return {
   {
-    "folke/tokyonight.nvim",
-    lazy = true,
-    opts = {
-      style = "night",
-      transparent = true,
-    },
-  },
-
-  -- Configure LazyVim to load gruvbox
-  {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "tokyonight",
+      colorscheme = "catppuccin-mocha",
     },
   },
 }

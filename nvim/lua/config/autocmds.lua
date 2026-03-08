@@ -20,16 +20,3 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt.conceallevel = 0
   end,
 })
-
--- tampilkan saat kursor berada di baris saat ini jika ada
-vim.api.nvim_create_autocmd("CursorHold", {
-  callback = function()
-    vim.diagnostic.open_float(nil, {
-      focusable = false,
-      close_events = { "CursorMoved", "CursorMovedI", "BufLeave" },
-      scope = "line", -- cursor, line
-      border = "rounded",
-      source = "always",
-    })
-  end,
-})

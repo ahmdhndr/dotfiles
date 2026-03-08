@@ -2,7 +2,7 @@ return {
   "catppuccin/nvim",
   lazy = true,
   name = "catppuccin",
-  opts = {},
+  priority = 1000,
   config = function()
     require("catppuccin").setup({
       flavour = "mocha",
@@ -27,7 +27,7 @@ return {
         },
       },
       auto_integrations = true,
-      transparent_background = false, -- disables setting the background color.
+      transparent_background = true, -- disables setting the background color.
       float = {
         transparent = false, -- enable transparent floating windows
         solid = false, -- use solid styling for floating windows, see |winborder|
@@ -36,6 +36,33 @@ return {
         enabled = true, -- dims the background color of inactive window
         shade = "light",
         percentage = 0.15, -- percentage of the shade to apply to the inactive window
+      },
+      integrations = {
+        cmp = true,
+        gitsigns = true,
+        nvimtree = true,
+        treesitter = true,
+        notify = true,
+        mini = {
+          enabled = true,
+          indentscope_color = "",
+        },
+        -- For LazyVim specific integrations
+        native_lsp = {
+          enabled = true,
+          virtual_text = {
+            errors = { "italic" },
+            hints = { "italic" },
+            warnings = { "italic" },
+            information = { "italic" },
+          },
+          underlines = {
+            errors = { "undercurl" },
+            hints = { "undercurl" },
+            warnings = { "undercurl" },
+            information = { "undercurl" },
+          },
+        },
       },
     })
   end,
