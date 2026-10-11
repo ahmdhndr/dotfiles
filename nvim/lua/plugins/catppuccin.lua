@@ -27,16 +27,16 @@ return {
         },
       },
       auto_integrations = true,
-      transparent_background = true, -- disables setting the background color.
+      transparent_background = true,
       float = {
         transparent = false, -- enable transparent floating windows
         solid = false, -- use solid styling for floating windows, see |winborder|
       },
-      dim_inactive = {
-        enabled = true, -- dims the background color of inactive window
-        shade = "light",
-        percentage = 0.15, -- percentage of the shade to apply to the inactive window
-      },
+      -- dim_inactive = {
+      --   enabled = true, -- dims the background color of inactive window
+      --   shade = "light",
+      --   percentage = 0.10, -- percentage of the shade to apply to the inactive window
+      -- },
       integrations = {
         cmp = true,
         gitsigns = true,

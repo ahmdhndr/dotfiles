@@ -1,3 +1,4 @@
+---@diagnostic disable: param-type-mismatch
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
@@ -97,6 +98,13 @@ vim.keymap.set("n", "/se", function()
     vim.opt.hlsearch = true
   end
 end, { desc = "Search exact (\\V)" })
+
+-- Save and run current Python file in a split terminal
+vim.keymap.set("n", "<leader>pr", function()
+  vim.cmd("w") -- Save file
+  vim.cmd("split | terminal python3 " .. vim.fn.expand("%"))
+  vim.cmd("resize 15")
+end, { desc = "Run Python File" })
 
 -- Find and replace in current file with Preview
 vim.keymap.set("n", "/sr", function()
