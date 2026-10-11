@@ -144,6 +144,10 @@ export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 # GO
 export PATH=$PATH:/usr/local/go/bin
 
+# nvim as default editor
+export EDITOR=nvim
+export SUDO_EDITOR=nvim
+
 # pnpm
 export PNPM_HOME="/home/ahmdhndr/.local/share/pnpm"
 case ":$PATH:" in
@@ -151,3 +155,18 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+export PATH="/home/ahmdhndr/.local/bin:$PATH"
+# luarocks
+export LUAROCKS_CONFIG="$HOME/.luarocks/config-5.1.lua"
+export PATH="$HOME/.luarocks/bin:$PATH"
+
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+
+# python local project
+# PYTHONPATH="$(pwd):$PYTHONPATH" nvim .
+
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+eval "$(luarocks path --lua-version=5.1)"

@@ -16,8 +16,8 @@ config.enable_tab_bar = false
 
 config.window_decorations = "RESIZE"
 
-config.color_scheme = "Tokyo Night (Gogh)"
+config.color_scheme = "Catppuccin Mocha"
 
-config.window_background_opacity = 0.85
+config.window_background_opacity = 0.90
 
 return config
